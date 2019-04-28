@@ -1,5 +1,13 @@
 package myth.concurrency;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -9,43 +17,28 @@ import java.util.concurrent.locks.ReentrantLock;
  **/
 public class Demo {
     public static void main(String[] args) {
-        ReentrantLock lock = new ReentrantLock();
+
+        Map map = new HashMap<Integer, String>();
+        map.put(null, "hello");
+        map.put(new Integer(0), "world");
+        map.put(new Integer(1), "wo");
+        map.put(null, "world");
+        System.out.println("atatatatatatatat".hashCode());
+        System.out.println("c6atatatatatatbU".hashCode());
+       /* ReentrantLock lock = new ReentrantLock();
         Object o = new Object();
-        Runnable r = new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    lock.lock();
-                    System.out.println(Thread.currentThread().getName() + " is running");
-                    Thread.sleep(30000);
-                    System.out.println(Thread.currentThread().getName() + " stop");
-                }catch (InterruptedException e) {
-                    e.printStackTrace();
-                }finally {
-                    lock.unlock();
-                }
-
+        ExecutorService service = new ThreadPoolExecutor(1,10,10,TimeUnit.SECONDS, new ArrayBlockingQueue<>(10)){
+            public int prestartAllCoreThreads() {
+                return 1;
             }
         };
-        Runnable r1 = new Runnable() {
-            @Override
-            public void run() {
 
-                {
-                    System.out.println(Thread.currentThread().getName() + " is running");
-                    try {
-                        Thread.sleep(20000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    System.out.println(Thread.currentThread().getName() + " stop");
-                }
-
-            }
+        List<Integer> a = new ArrayList<Integer>() {
+            {add(1);add(2);}
         };
-        new Thread(r1).start();
-        new Thread(r1).start();
-        new Thread(r1).start();
-        new Thread(r1).start();
-        }
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        System.out.println(a.size());*/
+    }
     }
