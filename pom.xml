@@ -21,7 +21,7 @@
         <module>DesignPattern</module>
         <module>jmh</module>
         <module>zookeeper</module>
-        <module>zookeeper</module>
+        <module>snippets</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

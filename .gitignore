@@ -1,12 +1,12 @@
-**/target
-/.settings
+**/target/
+**/.settings
 **/.idea
 **/*.iml
 **/*.DS_Store
 *.iml
-/.classpath
-/.project
+**/.classpath
+**/.project
 /bin/
 **/out
 **/logs
-
+**/.factorypath
