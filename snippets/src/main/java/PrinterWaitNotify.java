@@ -1,50 +1,29 @@
-package com.myth.file;
-
 public class PrinterWaitNotify {
-    public static void main(String[] args) {
-        Printer printer = new Printer();
-        new Thread(() -> printer.printEven(), "even").start();
-        new Thread(() -> printer.printOdd(), "odd").start();
+    private int count = 0;
+    private final Object lock = new Object();
+
+    public void turning() throws InterruptedException {
+        new Thread(new TurningRunner(), "偶数").start();
+        Thread.sleep(1);
+        new Thread(new TurningRunner(), "奇数").start();
     }
 
-    static class Printer {
-        private boolean isOdd;
-        private int max = 100;
-        private int number = 0;
-
-        synchronized void printEven() {
-            while (number < max) {
-                while (!isOdd) {
+    class TurningRunner implements Runnable {
+        @Override
+        public void run() {
+            while (count <= 100) {
+                synchronized (lock) {
+                    System.out.println(Thread.currentThread().getName() + ": " + count++);
+                    lock.notifyAll();
                     try {
-                        wait();
+                        if (count <= 100) {
+                            lock.wait();
+                        }
                     } catch (InterruptedException e) {
-                        Thread.currentThread().interrupt();
+                        e.printStackTrace();
                     }
                 }
-                System.out.println(Thread.currentThread().getName() + ":" + number);
-                isOdd = false;
-                number++;
-                notify();
             }
-
-
-        }
-
-        synchronized void printOdd() {
-            while (number < max) {
-                while (isOdd) {
-                    try {
-                        wait();
-                    } catch (InterruptedException e) {
-                        Thread.currentThread().interrupt();
-                    }
-                }
-                System.out.println(Thread.currentThread().getName() + ":" + number);
-                isOdd = true;
-                number++;
-                notify();
-            }
-
         }
     }
 

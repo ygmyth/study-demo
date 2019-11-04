@@ -1,5 +1,3 @@
-package com.myth.file;
-
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,37 +10,35 @@ import java.util.stream.Collectors;
 
 public class PrintABC implements Runnable {
     private static ReentrantLock lock = new ReentrantLock();
-    private static List<String> arr = Arrays.asList("A", "B", "C");
+    private static List<String> arr = Arrays.asList("A", "B", "C", "D");
     private static List<Condition> conds = arr.stream().map(i -> lock.newCondition()).collect(Collectors.toList());
     private static int token = 0;
+    private  int repeat = 3;
     private int index;
 
-    public PrintABC(int index) {
+    private PrintABC(int index) {
         this.index = index;
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        Thread[] threads = new Thread[arr.size()];
+    public static void main(String[] args) {
         for (int i = 0; i < arr.size(); i++) {
-            threads[i] = new Thread(new PrintABC(i), arr.get(i));
-            threads[i].start();
+            new Thread(new PrintABC(i), arr.get(i)).start();
         }
     }
-
 
     @Override
     public void run() {
         try {
             lock.lock();
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < repeat; i++) {
                 while (token != index) {
                     conds.get(index).await();
                 }
-                System.out.println(Thread.currentThread().getName());
-                token = (token + 1) % 3;
+                System.out.print(Thread.currentThread().getName());
+                token = (token + 1) % conds.size();
                 conds.get(token).signal();
             }
-        } catch (InterruptedException e) {
+        } catch (InterruptedException ignored) {
 
         } finally {
             lock.unlock();
