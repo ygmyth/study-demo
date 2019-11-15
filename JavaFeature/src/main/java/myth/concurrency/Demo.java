@@ -1,13 +1,7 @@
 package myth.concurrency;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -16,13 +10,10 @@ import java.util.concurrent.locks.ReentrantLock;
  * @create: 2019-03-29 18:46
  **/
 public class Demo {
-    public static void main(String[] args) {
 
-        Map map = new HashMap<Integer, String>();
-        map.put(null, "hello");
-        map.put(new Integer(0), "world");
-        map.put(new Integer(1), "wo");
-        map.put(null, "world");
+    private static Lock lock = new ReentrantLock();
+
+    public static void main(String[] args) {
         System.out.println("atatatatatatatat".hashCode());
         System.out.println("c6atatatatatatbU".hashCode());
        /* ReentrantLock lock = new ReentrantLock();
@@ -40,5 +31,20 @@ public class Demo {
         list.add(1);
         list.add(2);
         System.out.println(a.size());*/
+        long time = 1000;
+        for (int i = 0; i < 10; i++) {
+            int finalI = i;
+            new Thread(() -> {
+                lock.lock();
+                try {
+                    System.out.println("thread-"+ finalI +" start");
+                    for(int j =0; j < 1000000; j++){
+                        new HashMap<Integer,String>(10);
+                    }
+                } finally {
+                    lock.unlock();
+                }
+            }).start();
+        }
     }
-    }
+}

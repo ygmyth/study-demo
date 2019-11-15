@@ -1,5 +1,8 @@
 package myth;
 
+import io.netty.util.concurrent.FastThreadLocal;
+import io.netty.util.concurrent.FastThreadLocalThread;
+
 class FastThreadLocalTest {
     private static FastThreadLocal<Integer> fastThreadLocal = new FastThreadLocal<>();
 
@@ -30,3 +33,4 @@ class FastThreadLocalTest {
             }
         }, "fastThreadLocal2").start();
     }
+}
