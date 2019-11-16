@@ -1,10 +1,5 @@
-<<<<<<< HEAD:snippets/src/main/java/PrintABC.java
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-=======
 package myth;
 
->>>>>>> 46ad2f66ea1055b55f94a98097559f476552884e:snippets/src/main/java/myth/PrintABC.java
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.locks.Condition;
@@ -16,7 +11,7 @@ public class PrintABC implements Runnable {
     private static List<String> arr = Arrays.asList("A", "B", "C", "D");
     private static List<Condition> conds = arr.stream().map(i -> lock.newCondition()).collect(Collectors.toList());
     private static int token = 0;
-    private  int repeat = 3;
+    private int repeat = 3;
     private int index;
 
     private PrintABC(int index) {

@@ -1,8 +1,5 @@
-<<<<<<< HEAD:snippets/src/main/java/PrinterWaitNotify.java
-=======
 package myth;
 
->>>>>>> 46ad2f66ea1055b55f94a98097559f476552884e:snippets/src/main/java/myth/PrinterWaitNotify.java
 public class PrinterWaitNotify {
     private int count = 0;
     private final Object lock = new Object();

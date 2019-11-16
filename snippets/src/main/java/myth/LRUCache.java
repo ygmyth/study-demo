@@ -1,8 +1,6 @@
-<<<<<<< HEAD:snippets/src/main/java/LRUCache.java
-=======
+
 package myth;
 
->>>>>>> 46ad2f66ea1055b55f94a98097559f476552884e:snippets/src/main/java/myth/LRUCache.java
 import java.util.HashMap;
 
 public class LRUCache<K, V> {
