@@ -11,7 +11,7 @@ import java.util.Map;
  * @author: yuang gang
  * @create: 2019-04-03 17:36
  **/
-public class Send {
+public class Receiver {
     private final static String QUEUE_NAME = "hello";
     private final static String EXCHANGE_NAME = "exchange1";
     private final static String ROUTING_KEY1 = "routingKey1";
@@ -26,6 +26,8 @@ public class Send {
         factory.setPassword("guest");
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
+
+        // channel.exchangeDeclare(EXCHANGE_NAME,"direct",true);//声明可持久化交换器
 
         Map<String, Object> exArgs = Maps.newHashMap();
         exArgs.put("alternate-exchange", "alternate-exchange");

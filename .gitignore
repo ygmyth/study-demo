@@ -10,5 +10,6 @@
 **/out
 **/logs
 **/.factorypath
+**/.vscode
 **/.sh
 *.sh

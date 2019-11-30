@@ -1,9 +1,7 @@
 package myth.concurrency;
 
-import com.google.common.escape.Escaper;
 import org.springframework.util.StopWatch;
 
-import java.util.Random;
 import java.util.concurrent.*;
 
 /**
@@ -23,7 +21,7 @@ public class SemaPhoreDemo {
             final int no = i;
             Runnable run = () -> {
                 try {
-                    System.out.println("Accessing:"+no);
+                    System.out.println("Accessing:" + no);
                     Thread.sleep(10000);
                     System.out.println("======");
                 } catch (InterruptedException e) {
@@ -36,6 +34,5 @@ public class SemaPhoreDemo {
         stopWatch.stop();
         System.out.println(stopWatch.getTotalTimeSeconds());
     }
-
 
 }
