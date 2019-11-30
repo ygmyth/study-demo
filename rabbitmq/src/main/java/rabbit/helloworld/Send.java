@@ -32,7 +32,6 @@ public class Send {
 
         //channel.exchangeDeclare(EXCHANGE_NAME,"direct",true);//声明可持久化交换器
 
-
         Map<String, Object> exArgs = Maps.newHashMap();
         exArgs.put("alternate-exchange", "alternate-exchange");
         channel.exchangeDeclare("ex1","direct",true, false, exArgs);//声明可持久化交换器
