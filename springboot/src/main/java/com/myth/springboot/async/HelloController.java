@@ -46,10 +46,8 @@ public class HelloController {
     logger.info(Thread.currentThread().getName() + " 从helloController方法返回");
 
     webAsyncTask.onCompletion(() -> logger.info(Thread.currentThread().getName() + " 执行完毕"));
-
     webAsyncTask.onTimeout(() -> {
       logger.info(Thread.currentThread().getName() + " onTimeout");
-      // 超时的时候，直接抛异常，让外层统一处理超时异常
       throw new TimeoutException("调用超时");
     });
     return webAsyncTask;
@@ -77,21 +75,4 @@ public class HelloController {
 
     return deferredResult;
   }
-
-  /**
-   * 异步调用，异常处理，详细的处理流程见MyExceptionHandler类
-   *
-   * @return
-   */
-  @GetMapping("/exception")
-  public WebAsyncTask<String> exceptionController() {
-    logger.info(Thread.currentThread().getName() + " 进入helloController方法");
-    Callable<String> callable = () -> {
-      logger.info(Thread.currentThread().getName() + " 进入call方法");
-      throw new TimeoutException("调用超时!");
-    };
-    logger.info(Thread.currentThread().getName() + " 从helloController方法返回");
-    return new WebAsyncTask<>(20000, callable);
-  }
-
 }  
