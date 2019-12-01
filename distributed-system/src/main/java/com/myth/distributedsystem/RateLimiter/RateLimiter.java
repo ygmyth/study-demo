@@ -2,9 +2,9 @@ package com.myth.distributedsystem.RateLimiter;
 
 public interface RateLimiter {
 
-    boolean isOverLimit();
+  boolean isOverLimit();
 
-    int currentQPS();
+  int currentQPS();
 
-    boolean visit();
+  boolean visit();
 }

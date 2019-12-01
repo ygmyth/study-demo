@@ -1,5 +1,6 @@
 package myth;
 
 public interface A {
-    void operation(String s);
+
+  void operation(String s);
 }

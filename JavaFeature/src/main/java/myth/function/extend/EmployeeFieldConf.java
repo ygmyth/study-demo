@@ -7,27 +7,27 @@ import java.util.function.Function;
  */
 public enum EmployeeFieldConf {
 
-    Salary("Salary", "薪水", Employee::getSalary);
+  Salary("Salary", "薪水", Employee::getSalary);
 
-    private String name;
-    private String title;
-    private Function<Employee, String> method;
+  private String name;
+  private String title;
+  private Function<Employee, String> method;
 
-    EmployeeFieldConf(String name, String title, Function<Employee,String> method) {
-        this.name = name;
-        this.title = title;
-        this.method = method;
-    }
+  EmployeeFieldConf(String name, String title, Function<Employee, String> method) {
+    this.name = name;
+    this.title = title;
+    this.method = method;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public Function<Employee, String> getMethod() {
-        return method;
-    }
+  public Function<Employee, String> getMethod() {
+    return method;
+  }
 }

@@ -7,5 +7,5 @@ import myth.function.basic.Person;
  */
 public interface Employee extends Person {
 
-    String getSalary();
+  String getSalary();
 }

@@ -15,7 +15,8 @@ import java.util.function.Function;
  */
 public class ExecutorUtil {
 
-  private ExecutorUtil() {}
+  private ExecutorUtil() {
+  }
 
   private static final int CORE_CPUS = Runtime.getRuntime().availableProcessors();
   private static final int TASK_SIZE = 1000;
@@ -27,17 +28,17 @@ public class ExecutorUtil {
 
   /**
    * 根据指定的列表关键数据及列表数据处理器，并发地处理并返回处理后的列表数据集合
-   * @param allKeys 列表关键数据
-   * @param handleBizDataFunc 列表数据处理器
-   * @param <T> 待处理的数据参数类型
-   * @param <R> 待返回的数据结果类型
-   * @return 处理后的列表数据集合
    *
+   * @param allKeys           列表关键数据
+   * @param handleBizDataFunc 列表数据处理器
+   * @param <T>               待处理的数据参数类型
+   * @param <R>               待返回的数据结果类型
+   * @return 处理后的列表数据集合
+   * <p>
    * NOTE: 类似实现了 stream.par.map 的功能，不带延迟计算
    */
-  public static <T,R> List<R> exec(List<T> allKeys, Function<List<T>, List<R>> handleBizDataFunc) {
+  public static <T, R> List<R> exec(List<T> allKeys, Function<List<T>, List<R>> handleBizDataFunc) {
     List<String> parts = TaskUtil.divide(allKeys.size(), TASK_SIZE);
-
 
     CompletionService<List<R>>
         completionService = new ExecutorCompletionService<>(executor);
@@ -50,17 +51,19 @@ public class ExecutorUtil {
     });
 
     // foreach code refining
-    List<R> result = ForeachUtil.foreachAddWithReturn(parts.size(), (ind) -> get(ind, completionService));
+    List<R> result = ForeachUtil
+        .foreachAddWithReturn(parts.size(), (ind) -> get(ind, completionService));
     return result;
   }
 
   /**
    * 根据指定的列表关键数据及列表数据处理器，并发地处理
-   * @param allKeys 列表关键数据
-   * @param handleBizDataFunc 列表数据处理器
-   * @param <T> 待处理的数据参数类型
    *
-   * NOTE: foreachDone 的并发版
+   * @param allKeys           列表关键数据
+   * @param handleBizDataFunc 列表数据处理器
+   * @param <T>               待处理的数据参数类型
+   *                          <p>
+   *                          NOTE: foreachDone 的并发版
    */
   public static <T> void exec(List<T> allKeys, Consumer<List<T>> handleBizDataFunc) {
     List<String> parts = TaskUtil.divide(allKeys.size(), TASK_SIZE);

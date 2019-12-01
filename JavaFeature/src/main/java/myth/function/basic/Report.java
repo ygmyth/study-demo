@@ -8,20 +8,20 @@ import java.util.stream.Collectors;
  */
 public class Report {
 
-    public static void report(List<String> fields, List<Person> persons) {
-        String reportTitles = fields.stream().map(
-                field -> FieldConfAccompany.getInstance(field).getTitle()
-        ).collect(Collectors.joining(","));
+  public static void report(List<String> fields, List<Person> persons) {
+    String reportTitles = fields.stream().map(
+        field -> FieldConfAccompany.getInstance(field).getTitle()
+    ).collect(Collectors.joining(","));
 
-        List<String> rows = persons.stream().map(
-                p -> fields.stream().map(
-                        field -> FieldConfAccompany.getInstance(field).getMethod().apply(p)
-                ).collect(Collectors.joining(","))
-        ).collect(Collectors.toList());
+    List<String> rows = persons.stream().map(
+        p -> fields.stream().map(
+            field -> FieldConfAccompany.getInstance(field).getMethod().apply(p)
+        ).collect(Collectors.joining(","))
+    ).collect(Collectors.toList());
 
-        System.out.println(reportTitles);
-        System.out.println(String.join("\n",rows));
+    System.out.println(reportTitles);
+    System.out.println(String.join("\n", rows));
 
-    }
+  }
 
 }

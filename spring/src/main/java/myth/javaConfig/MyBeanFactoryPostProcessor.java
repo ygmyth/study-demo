@@ -13,14 +13,16 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
-    public MyBeanFactoryPostProcessor() {
-        System.out.println("构造器 BeanFactoryPostProcessor,初始化");
-    }
 
-    @Override
-    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        BeanDefinition db = beanFactory.getBeanDefinition("person");
-        db.getPropertyValues().addPropertyValue("phone", "110");
-        System.out.println("BeanFactoryPostProcessor 调用 postProcessBeanFactory 方法");
-    }
+  public MyBeanFactoryPostProcessor() {
+    System.out.println("构造器 BeanFactoryPostProcessor,初始化");
+  }
+
+  @Override
+  public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory)
+      throws BeansException {
+    BeanDefinition db = beanFactory.getBeanDefinition("person");
+    db.getPropertyValues().addPropertyValue("phone", "110");
+    System.out.println("BeanFactoryPostProcessor 调用 postProcessBeanFactory 方法");
+  }
 }

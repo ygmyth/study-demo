@@ -8,7 +8,7 @@ import java.util.function.Function;
  */
 public class CatchUtil {
 
-  public static <T,R> R tryDo(T t, Function<T,R> func) {
+  public static <T, R> R tryDo(T t, Function<T, R> func) {
     try {
       return func.apply(t);
     } catch (Exception e) {

@@ -12,26 +12,26 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
  **/
 public class Curator {
 
-    public static void main(String[] args) {
-        String connectionInfo = "18.179.178.195:2181";
-        RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
+  public static void main(String[] args) {
+    String connectionInfo = "18.179.178.195:2181";
+    RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
 
-        //静态工厂
-        CuratorFramework client1 =
-                CuratorFrameworkFactory.newClient(
-                        connectionInfo, 5000, 3000, retryPolicy);
+    //静态工厂
+    CuratorFramework client1 =
+        CuratorFrameworkFactory.newClient(
+            connectionInfo, 5000, 3000, retryPolicy);
 
-        //fluent风格,
-        CuratorFramework client2 =
-                CuratorFrameworkFactory.builder()
-                        .connectString(connectionInfo)
-                        .sessionTimeoutMs(5000)
-                        .connectionTimeoutMs(3000)
-                        .retryPolicy(retryPolicy)
-                        .namespace("zk-demo")
-                        .build();
-        client1.start();
-        client2.start();
+    //fluent风格,
+    CuratorFramework client2 =
+        CuratorFrameworkFactory.builder()
+            .connectString(connectionInfo)
+            .sessionTimeoutMs(5000)
+            .connectionTimeoutMs(3000)
+            .retryPolicy(retryPolicy)
+            .namespace("zk-demo")
+            .build();
+    client1.start();
+    client2.start();
 
-    }
+  }
 }

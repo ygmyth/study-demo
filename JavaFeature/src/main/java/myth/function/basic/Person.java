@@ -5,8 +5,9 @@ package myth.function.basic;
  */
 public interface Person {
 
-    String getId();
-    String getName();
+  String getId();
 
-    String able();
+  String getName();
+
+  String able();
 }

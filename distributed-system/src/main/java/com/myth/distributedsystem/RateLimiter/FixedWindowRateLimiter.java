@@ -3,74 +3,76 @@ package com.myth.distributedsystem.RateLimiter;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class FixedWindowRateLimiter implements RateLimiter {
-    private Long lastVisitAt = System.currentTimeMillis();
-    private static final int DEFAULT_ALLOWED_VISIT_PER_SECOND = 5;
 
-    private final int maxVisitPerSecond;
+  private Long lastVisitAt = System.currentTimeMillis();
+  private static final int DEFAULT_ALLOWED_VISIT_PER_SECOND = 5;
 
-    private AtomicInteger count;
+  private final int maxVisitPerSecond;
 
-    public FixedWindowRateLimiter(int maxVisitPerSecond){
-        this.maxVisitPerSecond = maxVisitPerSecond;
-        this.count = new AtomicInteger();
+  private AtomicInteger count;
+
+  public FixedWindowRateLimiter(int maxVisitPerSecond) {
+    this.maxVisitPerSecond = maxVisitPerSecond;
+    this.count = new AtomicInteger();
+  }
+
+  public FixedWindowRateLimiter() {
+    this(DEFAULT_ALLOWED_VISIT_PER_SECOND);
+  }
+
+  @Override
+  public boolean isOverLimit() {
+    return count.get() > maxVisitPerSecond;
+  }
+
+  @Override
+  public int currentQPS() {
+    return count.get();
+  }
+
+  @Override
+  public boolean visit() {
+    long now = System.currentTimeMillis();
+    synchronized (lastVisitAt) {
+      if (now - lastVisitAt > 1000) {
+        lastVisitAt = now;
+        System.out.println(currentQPS());
+        count.set(1);
+      }
     }
+    count.incrementAndGet();
+    return isOverLimit();
+  }
 
-    public FixedWindowRateLimiter() {
-        this(DEFAULT_ALLOWED_VISIT_PER_SECOND);
-    }
-    @Override
-    public boolean isOverLimit() {
-        return count.get() > maxVisitPerSecond;
-    }
-
-    @Override
-    public int currentQPS() {
-        return count.get();
-    }
-
-    @Override
-    public boolean visit() {
-        long now = System.currentTimeMillis();
-        synchronized (lastVisitAt) {
-            if (now - lastVisitAt > 1000) {
-                lastVisitAt = now;
-                System.out.println(currentQPS());
-                count.set(1);
-            }
+  public static void main(String[] args) {
+    RateLimiter rateLimiter = new FixedWindowRateLimiter();
+    new Thread(new Runnable() {
+      @Override
+      public void run() {
+        while (true) {
+          rateLimiter.visit();
+          try {
+            Thread.sleep(100);
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
         }
-        count.incrementAndGet();
-        return isOverLimit();
-    }
+      }
+    }).start();
 
-    public static void main(String[] args) {
-        RateLimiter rateLimiter = new FixedWindowRateLimiter();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(true) {
-                    rateLimiter.visit();
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
+    new Thread(new Runnable() {
+      @Override
+      public void run() {
+        while (true) {
+          rateLimiter.visit();
+          try {
+            Thread.sleep(100);
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
+        }
+      }
+    }).start();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(true) {
-                    rateLimiter.visit();
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
-
-    }
+  }
 }

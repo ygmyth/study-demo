@@ -22,7 +22,7 @@ public class ConcurrentDataHandlerFrame {
 
   public static List<String> getKeys() {
     List<String> keys = new ArrayList<String>();
-    for (int i=0; i< 20000; i++) {
+    for (int i = 0; i < 20000; i++) {
       keys.add(String.valueOf(i));
     }
     return keys;
@@ -37,7 +37,7 @@ public class ConcurrentDataHandlerFrame {
     ExecutorService executor = Executors.newFixedThreadPool(parts.size());
     CompletionService<List<T>>
         completionService = new ExecutorCompletionService<List<T>>(executor);
-    for (String part: parts) {
+    for (String part : parts) {
       int start = Integer.parseInt(part.split(":")[0]);
       int end = Integer.parseInt(part.split(":")[1]);
       if (end > allKeys.size()) {
@@ -53,7 +53,7 @@ public class ConcurrentDataHandlerFrame {
 
     // 这里是先完成先加入, 不保证报表行顺序, 因此在获取所有的报表行后要进行排序便于商家查看
     List<T> result = new ArrayList<T>();
-    for (int i=0; i< parts.size(); i++) {
+    for (int i = 0; i < parts.size(); i++) {
       try {
         result.addAll(completionService.take().get());
       } catch (Exception e) {
@@ -66,18 +66,23 @@ public class ConcurrentDataHandlerFrame {
 
 }
 
-/** 业务数据接口 */
+/**
+ * 业务数据接口
+ */
 interface IGetBizData<T> {
+
   List<T> getData(List<String> keys);
 }
 
-/** 获取业务数据具体实现 */
+/**
+ * 获取业务数据具体实现
+ */
 class GetTradeData implements IGetBizData<Integer> {
 
   @Override
   public List<Integer> getData(List<String> keys) {
     List<Integer> result = new ArrayList<Integer>();
-    for (String key: keys) {
+    for (String key : keys) {
       result.add(Integer.valueOf(key) % 1000000000);
     }
     return result;

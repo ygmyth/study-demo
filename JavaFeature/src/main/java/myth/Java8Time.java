@@ -12,28 +12,27 @@ import java.util.Set;
  **/
 public class Java8Time {
 
-    public static void main(String[] args) {
-        Set<String> zids  = ZoneId.getAvailableZoneIds();
-        System.out.println(zids);
+  public static void main(String[] args) {
+    Set<String> zids = ZoneId.getAvailableZoneIds();
+    System.out.println(zids);
 
+    Instant instant = Instant.now();
+    System.out.println(instant.getEpochSecond());
+    System.out.println(instant.getNano());
 
-        Instant instant = Instant.now();
-        System.out.println(instant.getEpochSecond());
-        System.out.println(instant.getNano());
+    //localDate
+    LocalDate date = LocalDate.now();
+    System.out.println(new Date());
+    System.out.println(date);
+    LocalTime time = LocalTime.now();
+    System.out.println(time);
 
-        //localDate
-        LocalDate date = LocalDate.now();
-        System.out.println(new Date());
-        System.out.println(date);
-        LocalTime time = LocalTime.now();
-        System.out.println(time);
+    LocalDateTime dateTime = LocalDateTime.now();
+    System.out.println(dateTime);
 
-        LocalDateTime dateTime = LocalDateTime.now();
-        System.out.println(dateTime);
-
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
-        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String formatDate = formatter1.format(dateTime);
-        LocalDateTime dd = LocalDateTime.parse(formatDate, formatter1);
-    }
+    DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+    DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    String formatDate = formatter1.format(dateTime);
+    LocalDateTime dd = LocalDateTime.parse(formatDate, formatter1);
+  }
 }

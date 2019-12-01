@@ -6,4 +6,5 @@ package myth.concurrency;
  * @create: 2019-03-31 21:41
  **/
 public class LoadMock {
+
 }

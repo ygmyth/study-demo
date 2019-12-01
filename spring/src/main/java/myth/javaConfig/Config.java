@@ -12,11 +12,12 @@ import org.springframework.context.annotation.Configuration;
  **/
 @Configuration
 public class Config {
-    @Bean
-    public Person person() {
-        Person person = new Person();
-        person.setAge(10);
-        person.setName("hello");
-        return person;
-    }
+
+  @Bean
+  public Person person() {
+    Person person = new Person();
+    person.setAge(10);
+    person.setName("hello");
+    return person;
+  }
 }

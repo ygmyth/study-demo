@@ -20,7 +20,6 @@ public class ForkJoin {
     fjp.submit(new RaskDemo(0, 10000));
     fjp.awaitTermination(2, TimeUnit.SECONDS);
 
-
     int arr[] = new int[1000];
     Random random = new Random();
     int total = 0;
@@ -36,7 +35,7 @@ public class ForkJoin {
 //        Future<Integer> future = forkJoinPool.submit(new RecursiveTaskDemo(arr, 0, arr.length));
 //        System.out.println("计算出来的总和="+future.get());
 
-    Integer integer = forkJoinPool.invoke( new RecursiveTaskDemo(arr, 0, arr.length)  );
+    Integer integer = forkJoinPool.invoke(new RecursiveTaskDemo(arr, 0, arr.length));
     System.out.println("计算出来的总和=" + integer);
 
     // 关闭线程池
@@ -44,9 +43,11 @@ public class ForkJoin {
 
   }
 }
- class RaskDemo extends RecursiveAction {
+
+class RaskDemo extends RecursiveAction {
+
   /**
-   *  每个"小任务"最多只打印20个数
+   * 每个"小任务"最多只打印20个数
    */
   private static final int MAX = 20;
 
@@ -61,11 +62,11 @@ public class ForkJoin {
   @Override
   protected void compute() {
     //当end-start的值小于MAX时，开始打印
-    if((end-start) < MAX) {
-      for(int i= start; i<end;i++) {
-        System.out.println(Thread.currentThread().getName()+"i的值"+i);
+    if ((end - start) < MAX) {
+      for (int i = start; i < end; i++) {
+        System.out.println(Thread.currentThread().getName() + "i的值" + i);
       }
-    }else {
+    } else {
       // 将大任务分解成两个小任务
       int middle = (start + end) / 2;
       RaskDemo left = new RaskDemo(start, middle);
@@ -76,10 +77,10 @@ public class ForkJoin {
   }
 }
 
- class RecursiveTaskDemo extends RecursiveTask<Integer> {
+class RecursiveTaskDemo extends RecursiveTask<Integer> {
 
   /**
-   *  每个"小任务"最多只打印70个数
+   * 每个"小任务"最多只打印70个数
    */
   private static final int MAX = 70;
   private int arr[];
@@ -97,12 +98,12 @@ public class ForkJoin {
   protected Integer compute() {
     int sum = 0;
     // 当end-start的值小于MAX时候，开始打印
-    if((end - start) < MAX) {
+    if ((end - start) < MAX) {
       for (int i = start; i < end; i++) {
         sum += arr[i];
       }
       return sum;
-    }else {
+    } else {
       System.err.println("=====任务分解======");
       // 将大任务分解成两个小任务
       int middle = (start + end) / 2;

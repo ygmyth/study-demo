@@ -8,7 +8,8 @@ import java.util.List;
  */
 public class TaskUtil {
 
-  private TaskUtil() {}
+  private TaskUtil() {
+  }
 
   public static List<String> divide(int totalSize, int persize) {
     List<String> parts = new ArrayList<String>();
@@ -23,9 +24,9 @@ public class TaskUtil {
 
     int num = totalSize / persize + (totalSize % persize == 0 ? 0 : 1);
 
-    for (int i=0; i<num; i++) {
-      int start = persize*i;
-      int end = persize*i+persize;
+    for (int i = 0; i < num; i++) {
+      int start = persize * i;
+      int end = persize * i + persize;
       if (end > totalSize) {
         end = totalSize;
       }

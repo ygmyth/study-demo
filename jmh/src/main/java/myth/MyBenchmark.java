@@ -44,25 +44,25 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Thread)
 public class MyBenchmark {
 
-    @Benchmark
-    public int sleepAWhile() {
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            // ignore
-        }
-        return 0;
+  @Benchmark
+  public int sleepAWhile() {
+    try {
+      Thread.sleep(100);
+    } catch (InterruptedException e) {
+      // ignore
     }
+    return 0;
+  }
 
-    public static void main(String[] args) throws RunnerException {
-        Options opt = new OptionsBuilder()
-                .include(MyBenchmark.class.getSimpleName())
-                .forks(1)
-                .warmupIterations(5)
-                .measurementIterations(5)
-                .build();
+  public static void main(String[] args) throws RunnerException {
+    Options opt = new OptionsBuilder()
+        .include(MyBenchmark.class.getSimpleName())
+        .forks(1)
+        .warmupIterations(5)
+        .measurementIterations(5)
+        .build();
 
-        new Runner(opt).run();
-    }
+    new Runner(opt).run();
+  }
 
 }

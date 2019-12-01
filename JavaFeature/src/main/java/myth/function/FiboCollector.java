@@ -18,7 +18,8 @@ public class FiboCollector implements Collector<Integer, List<Integer>, List<Int
   public Supplier<List<Integer>> supplier() {
     return () -> {
       List<Integer> result = new ArrayList<>();
-      result.add(0); result.add(1);
+      result.add(0);
+      result.add(1);
       return result;
     };
   }
@@ -26,7 +27,7 @@ public class FiboCollector implements Collector<Integer, List<Integer>, List<Int
   @Override
   public BiConsumer<List<Integer>, Integer> accumulator() {
     return (res, num) -> {
-      Integer next = res.get(res.size()-1) + res.get(res.size()-2);
+      Integer next = res.get(res.size() - 1) + res.get(res.size() - 2);
       res.add(next);
     };
   }
@@ -39,7 +40,11 @@ public class FiboCollector implements Collector<Integer, List<Integer>, List<Int
 
   @Override
   public Function<List<Integer>, List<Integer>> finisher() {
-    return res -> { res.remove(0); res.remove(1); return res; };
+    return res -> {
+      res.remove(0);
+      res.remove(1);
+      return res;
+    };
   }
 
   @Override

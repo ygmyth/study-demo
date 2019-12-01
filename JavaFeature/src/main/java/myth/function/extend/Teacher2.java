@@ -5,35 +5,35 @@ package myth.function.extend;
  */
 public class Teacher2 implements Employee {
 
-    private String teacherId;
-    private String name;
-    private String able;
+  private String teacherId;
+  private String name;
+  private String able;
 
-    private String salary;
+  private String salary;
 
-    public Teacher2(String teacherId, String name, String able, String salary) {
-        this.teacherId = teacherId;
-        this.name = name;
-        this.able = able;
-        this.salary = salary;
-    }
+  public Teacher2(String teacherId, String name, String able, String salary) {
+    this.teacherId = teacherId;
+    this.name = name;
+    this.able = able;
+    this.salary = salary;
+  }
 
-    @Override
-    public String getId() {
-        return teacherId;
-    }
+  @Override
+  public String getId() {
+    return teacherId;
+  }
 
-    @Override
-    public String getName() {
-        return name;
-    }
+  @Override
+  public String getName() {
+    return name;
+  }
 
-    @Override
-    public String able() {
-        return able;
-    }
+  @Override
+  public String able() {
+    return able;
+  }
 
-    public String getSalary() {
-        return salary;
-    }
+  public String getSalary() {
+    return salary;
+  }
 }
