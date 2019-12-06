@@ -1,6 +1,6 @@
 package myth.javaConfig;
 
-import myth.Person;
+import myth.entity.Person;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

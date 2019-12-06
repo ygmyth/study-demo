@@ -1,10 +1,9 @@
 package myth.xmlConfig;
 
-import myth.Person;
+import myth.entity.Person;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyValues;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessorAdapter;
-import org.springframework.stereotype.Component;
 
 import java.beans.PropertyDescriptor;
 

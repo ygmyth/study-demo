@@ -1,6 +1,6 @@
 package myth.javaConfig;
 
-import myth.Person;
+import myth.entity.Person;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyValues;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessorAdapter;

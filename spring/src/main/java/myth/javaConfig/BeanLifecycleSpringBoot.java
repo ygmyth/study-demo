@@ -1,6 +1,6 @@
 package myth.javaConfig;
 
-import myth.Person;
+import myth.entity.Person;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

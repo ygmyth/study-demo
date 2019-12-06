@@ -1,3 +1,4 @@
+import myth.entity.Person;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

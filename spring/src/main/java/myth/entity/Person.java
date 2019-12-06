@@ -1,3 +1,5 @@
+package myth.entity;
+
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.*;
 import org.springframework.context.ApplicationContext;
@@ -19,12 +21,12 @@ public class Person implements BeanNameAware, BeanFactoryAware, ApplicationConte
   private ApplicationContext applicationContext;
 
   public Person() {
-    System.out.println("Bean构造器 myth.Person,初始化");
+    System.out.println("Bean构造器 myth.myth.entity.Person,初始化");
   }
 
   @Override
   public String toString() {
-    return "myth.Person{" +
+    return "myth.myth.entity.Person{" +
         "name='" + name + '\'' +
         ", age=" + age +
         ", phone=" + phone +
