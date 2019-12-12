@@ -38,5 +38,4 @@ public class Test {
     mqTest.sendTopic();
     return "success";
   }
-
 }

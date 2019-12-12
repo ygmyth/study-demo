@@ -1,5 +1,7 @@
-package com.myth.springboot.service;
+package com.myth.springboot.async;
 
+import com.myth.springboot.interceptor.Timer;
+import com.myth.springboot.service.Testi;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -10,13 +12,13 @@ import org.springframework.stereotype.Service;
  **/
 @Service
 @Slf4j
-public class HelloService {
+public class HelloService implements Testi {
 
+  @Override
   public String sayHello() {
     try {
       Thread.sleep(2000);
     } catch (InterruptedException e) {
-      log.info("sleep 超时 ");
     }
     return "say hello!";
   }

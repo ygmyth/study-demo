@@ -1,6 +1,7 @@
 package myth.function.refactor.result;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -24,9 +25,15 @@ public class ConcurrentDataHandlerFrameRefactored {
     consumer(handledData, System.out::println);
 
     List<Object> objs = StreamUtil.map(DataSupplier.getKeys(), s -> Double.valueOf(s));
+<<<<<<< Updated upstream
     List<Object> handledData2 = handleAllData(
         (numbers) -> StreamUtil.map(numbers, (num) -> Math.pow((double) num, 2)))
         .apply(objs);
+=======
+    List<Object> handledData2 = Collections.singletonList(
+        handleAllData((numbers) -> StreamUtil.map(numbers, (num) -> Math.pow((double) num, 2)))
+            .apply(objs));
+>>>>>>> Stashed changes
     consumer(handledData2, System.out::println);
 
     Function<List<String>, List<Object>> func = (numbers) -> StreamUtil.map(numbers,

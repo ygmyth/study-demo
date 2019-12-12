@@ -21,7 +21,7 @@ public class RabbitMqConfig {
     public final static String TOPIC_EXCHANGE = "topic_exchange";
     public final static String FANOUT_EXCHANGE = "fanout_exchange";
 
-    public final static String TOPIC_ROUTINGKEY_ONE = "common_key";
+    public final static String TOPIC_ROUTINGKEY_ONE = "*.one";
     public final static String TOPIC_ROUTINGKEY_TWO = "*.key";
 
 //  direct模式队列

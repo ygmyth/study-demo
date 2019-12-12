@@ -25,6 +25,7 @@ public class BeanLifecycleSpringBoot implements CommandLineRunner {
     ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
     System.out.println("容器初始化成功");
     Person person = context.getBean(Person.class);
+
     System.out.println(person);
     System.out.println("开始关闭容器");
     ((ClassPathXmlApplicationContext) context).registerShutdownHook();
@@ -43,6 +44,5 @@ public class BeanLifecycleSpringBoot implements CommandLineRunner {
   @Override
   public void run(String... args) throws Exception {
     testJavaConfig();
-    //testXmlConfig();
   }
 }
