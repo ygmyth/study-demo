@@ -3,6 +3,11 @@ package myth;
 
 import java.util.HashMap;
 
+/**
+ * @description:
+ * @author: yuang gang
+ * @create: 2021-02-27 15:33
+ **/
 public class LRUCache<K, V> {
 
   private final float DEFAULT_LOAD_FACTOR = 0.75f;
@@ -27,17 +32,15 @@ public class LRUCache<K, V> {
       this.key = key;
       this.value = value;
     }
-
   }
 
-  public V get(Object key) {
+  public V get(K key) {
     if (map.containsKey(key)) {
       Node<K, V> n = map.get(key);
       delete(n);
       setHead(n);
       return n.value;
     }
-
     return null;
   }
 
@@ -51,16 +54,12 @@ public class LRUCache<K, V> {
     } else {
       Node<K, V> newNode = new Node<>(key, value);
       if (map.size() >= capacity) {
-
         map.remove(end.key);
-        // remove last node
         delete(end);
         setHead(newNode);
-
       } else {
         setHead(newNode);
       }
-
       map.put(key, newNode);
     }
   }
@@ -89,7 +88,6 @@ public class LRUCache<K, V> {
     if (head != null) {
       head.prev = node;
     }
-
     head = node;
 
     if (end == null) {
@@ -102,8 +100,6 @@ public class LRUCache<K, V> {
     lrucache.set(1, 100);
     lrucache.set(10, 99);
     lrucache.set(15, 98);
-    lrucache.set(10, 97);
-    lrucache.set(12, 96);
     lrucache.set(18, 95);
     lrucache.set(1, 94);
     System.out.println(lrucache.get(1));
