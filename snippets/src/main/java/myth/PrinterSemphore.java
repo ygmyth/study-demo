@@ -11,7 +11,6 @@ public class PrinterSemphore {
   }
 
   static class Printer {
-
     private Semaphore semEven = new Semaphore(1);
     private Semaphore semOdd = new Semaphore(0);
     private int MAX = 50;
@@ -38,7 +37,6 @@ public class PrinterSemphore {
         System.out.println(Thread.currentThread().getName() + ":" + i);
         semEven.release();
       }
-
     }
   }
 }

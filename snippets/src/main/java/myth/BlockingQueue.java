@@ -36,11 +36,6 @@ public class BlockingQueue {
         items = new Object[capacity];
     }
 
-    /**
-     * 入队操作
-     *
-     * @param e 待插入的对象
-     */
     private void enqueue(Object e) {
         // 将对象e放入putIndex指向的位置
         items[putIndex] = e;
@@ -50,11 +45,6 @@ public class BlockingQueue {
             putIndex = 0;
     }
 
-    /**
-     * 出队操作
-     *
-     * @return  被弹出的元素
-     */
     private Object dequeue() {
         // 取出takeIndex指向位置中的元素
         // 并将该位置清空
@@ -69,11 +59,6 @@ public class BlockingQueue {
         return e;
     }
 
-    /**
-     * 将指定元素插入队列
-     *
-     * @param e 待插入的对象
-     */
     public void put(Object e) throws InterruptedException {
         int c = -1;
         putLock.lockInterruptibly();
@@ -104,9 +89,6 @@ public class BlockingQueue {
             signalNotEmpty();
     }
 
-    /**
-     * 唤醒等待队列非空条件的线程
-     */
     private void signalNotEmpty() {
         // 为了唤醒等待队列非空条件的线程，需要先获取对应的takeLock
         takeLock.lock();
@@ -118,11 +100,6 @@ public class BlockingQueue {
         }
     }
 
-    /**
-     * 从队列中弹出一个元素
-     *
-     * @return  被弹出的元素
-     */
     public Object take() throws InterruptedException {
         Object e;
         int c = -1;
@@ -155,9 +132,6 @@ public class BlockingQueue {
         return e;
     }
 
-    /**
-     * 唤醒等待队列未满条件的线程
-     */
     private void signalNotFull() {
         // 为了唤醒等待队列未满条件的线程，需要先获取对应的putLock
         putLock.lock();
