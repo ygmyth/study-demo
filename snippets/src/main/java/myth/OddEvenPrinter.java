@@ -12,7 +12,7 @@ public class OddEvenPrinter {
     }
 
     public static void main(String[] args) {
-        OddEvenPrinter printer = new OddEvenPrinter(0, 10);
+        OddEvenPrinter printer = new OddEvenPrinter(0, 100);
         new Thread(printer::print, "odd").start();
         new Thread(printer::print, "even").start();
     }
@@ -21,13 +21,14 @@ public class OddEvenPrinter {
         synchronized (monitor) {
             while (count < limit) {
                 try {
-                    System.out.println(String.format("线程[%s]打印数字:%d", Thread.currentThread().getName(), ++count));
+                    System.out.println(count);
+                    count++;
                     monitor.notifyAll();
                     monitor.wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-            //防止有子线程被阻塞未被唤醒，导致主线程不退出            monitor.notifyAll();
+            monitor.notifyAll();
         }
     }}

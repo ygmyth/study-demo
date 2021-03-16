@@ -2,12 +2,15 @@ package myth;
 
 import java.util.concurrent.Semaphore;
 
+import javax.sound.sampled.SourceDataLine;
+
 public class PrinterSemphore {
 
   public static void main(String[] args) {
     Printer printer = new Printer();
-    new Thread(() -> printer.printEven(), "even").start();
     new Thread(() -> printer.printOdd(), "odd").start();
+    new Thread(() -> printer.printEven(), "even").start();
+
   }
 
   static class Printer {

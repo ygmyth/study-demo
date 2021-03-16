@@ -1,5 +1,4 @@
 package myth;
-
 public class NumAndLetterPrinter {
     private static char c = 'A';
     private static int i = 0;

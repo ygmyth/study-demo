@@ -1,7 +1,4 @@
 package myth;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -13,30 +10,31 @@ public class PrintCondition {
   private static final Condition odd = lock.newCondition();
 
   public void printEven(){
-    while (count <= 10) {
+    while (count <= 10000) {
+      lock.lock();
       try {
-        lock.lock();
+        if (count > 9999)
         System.out.println("奇: " + count);
         count++;
-        even.signal();
+        odd.signal();
         even.await();
       } catch (InterruptedException e) {
-        e.printStackTrace();
       } finally {
         lock.unlock();
       }
     }
   }
+
   public void printOdd(){
-    while (count <= 10) {
+    while (count <= 10000) {
+      lock.lock();
       try {
-        lock.lock();
+        if (count > 9999)
         System.out.println("偶: " + count);
         count++;
         even.signal();
-        even.await();
+        odd.await();
       } catch (InterruptedException e) {
-        e.printStackTrace();
       } finally {
         lock.unlock();
       }
